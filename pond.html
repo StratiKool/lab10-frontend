@@ -17,14 +17,16 @@
     </ul>
 
     <div id="pond"></div>
-
+    <script src="configuration.js"></script>
     <script>
-      let host = "http://localhost:8080";
+      let host = getHost();
       let ducks = [];
       displayTheDucks();
 
       async function getAll() {
-        let response = await fetch(host + "/ducks");
+        const headers = { 'Authorization': `Bearer ${configuration.token}` };
+        let response = await fetch(host + "/ducks", { headers });
+        console.log(configuration.token);
         let result = await response.json();
         return result;
       }
@@ -33,6 +35,7 @@
         if (ducks.length == 0) {
           ducks = await getAll();
         }
+        console.log(configuration.token);
 
         let pond = document.getElementById("pond");
         pond.innerHTML = "";

@@ -17,6 +17,7 @@ async function login() {
             alert("The login was successful!");
             const token = await response.text();
             configuration.token = token;
+            console.log(configuration.token);
             configuration.loggedIn = true;
             location.href = "index.html";
 
